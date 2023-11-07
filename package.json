@@ -4,7 +4,10 @@
   "description": "Base API Automation framework for any project that wants to automate APIs easy and simple",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cy:open": "cypress open",
+    "cy:staging": "cypress run --env environmentName=staging",
+    "cy:qa": "cypress run --env environmentName=qa"
   },
   "repository": {
     "type": "git",

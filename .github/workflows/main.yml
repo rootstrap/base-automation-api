@@ -7,23 +7,18 @@ on:
   workflow_dispatch:
       inputs:
         env-selector:
-          description: Run environment (set env to run with qa - staging - dev - qa2)
+          description: Run environment (set env to run with qa - staging)
           required: true
           type: choice
           options:
             - --env environmentName=qa
-            - --env environmentName=staging
-            - --env environmentName=dev
-            - --env environmentName=qa2
-            - --env environmentName=uat          
+            - --env environmentName=staging       
         specs:
           description: Run specs
           required: true
           type: choice
           options: 
-            - --spec 'cypress/e2e/API/caramel/*.cy.js'
-            - --spec 'cypress/e2e/API/partners/**/*.cy.js'
-            - --spec 'cypress/e2e/API/*/*.cy.js' 
+            - --spec 'cypress/e2e/*.cy.js'
             
     
 jobs:
@@ -36,11 +31,11 @@ jobs:
       - name: Run API Test
         uses: cypress-io/github-action@v5
         with:
-          command: npx cypress run --env environmentName=qa --spec 'cypress/e2e/API/caramel/*.cy.js'
+          command: npx cypress run --env environmentName=qa 
           browser: chrome
           record: false
 
-  api-core-schedule-qa:
+  api-schedule-qa:
     runs-on: ubuntu-latest
     if: github.event_name == 'schedule'
     steps:
@@ -49,48 +44,9 @@ jobs:
       - name: Run API Test
         uses: cypress-io/github-action@v5
         with:
-          command: npx cypress run --env environmentName=qa --spec 'cypress/e2e/API/caramel/*.cy.js'
+          command: npx cypress run --env environmentName=qa 
           browser: chrome
-          record: false
-
-  api-core-schedule-stg:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'schedule'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Run API Test
-        uses: cypress-io/github-action@v5
-        with:
-          command: npx cypress run --env environmentName=staging --spec 'cypress/e2e/API/caramel/*.cy.js'
-          browser: chrome
-          record: false
-
-  api-core-schedule-dev:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'schedule'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Run API Test
-        uses: cypress-io/github-action@v5
-        with:
-          command: npx cypress run --env environmentName=dev --spec 'cypress/e2e/API/caramel/*.cy.js'
-          browser: chrome
-          record: false
-
-  api-partners-schedule-stg:
-      runs-on: ubuntu-latest
-      if: github.event_name == 'schedule'
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v3
-        - name: Run API Test
-          uses: cypress-io/github-action@v5
-          with:
-            command: npx cypress run --env environmentName=qa --spec 'cypress/e2e/API/partners/**/*.cy.js'
-            browser: chrome
-            record: false          
+          record: false  
 
   cypress-api-workflow_dispatch:
       runs-on: ubuntu-latest
