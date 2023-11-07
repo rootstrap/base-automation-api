@@ -1,0 +1,22 @@
+{
+  "name": "base-automation-api",
+  "version": "1.0.0",
+  "description": "Base API Automation framework for any project that wants to automate APIs easy and simple",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rootstrap/base-automation-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rootstrap/base-automation-api/issues"
+  },
+  "homepage": "https://github.com/rootstrap/base-automation-api#readme",
+  "devDependencies": {
+    "cypress": "^13.4.0"
+  }
+}
