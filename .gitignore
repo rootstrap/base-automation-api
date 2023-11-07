@@ -1,0 +1,11 @@
+# caramel-cypress-automation
+.env
+.DS_Store
+/build
+/node_modules
+/cypress/videos
+/cypress/downloads
+/cypress/logs
+/cypress/screenshots
+package-lock.json
+
