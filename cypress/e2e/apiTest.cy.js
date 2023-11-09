@@ -44,4 +44,19 @@ describe('Post - Test scenarios ', () => {
     
           });
         });
+
+    // Test if the API handles requests for non-existing Pokemon correctly
+
+    it('Get a non-existing Pokemon ', () => {
+      cy.api({
+        method: 'GET',
+        url: 'https://pokeapi.co/api/v2/pokemon/9999',
+        failOnStatusCode: false,
+
+      }).then((response) => {
+        expect(response.status).to.eq(404);
+
+        });
+      });
+
     });
