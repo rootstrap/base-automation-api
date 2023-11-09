@@ -1,0 +1,64 @@
+name: Rootstrap Base - API Automation Tests
+
+on:
+  push:
+  schedule:
+    - cron: '0 12 * * 1-5'
+  workflow_dispatch:
+      inputs:
+        env-selector:
+          description: Run environment (set env to run with qa - staging)
+          required: true
+          type: choice
+          options:
+            - --env environmentName=qa
+            - --env environmentName=staging       
+        specs:
+          description: Run specs
+          required: true
+          type: choice
+          options: 
+            - --spec 'cypress/e2e/*.cy.js'
+            
+    
+jobs:
+  cypress-run-push:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Run API Test
+        uses: cypress-io/github-action@v5
+        with:
+          command: npx cypress run --env environmentName=qa 
+          browser: chrome
+          record: false
+
+  api-schedule-qa:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Run API Test
+        uses: cypress-io/github-action@v5
+        with:
+          command: npx cypress run --env environmentName=qa
+          browser: chrome
+          record: false  
+
+  cypress-api-workflow_dispatch:
+      runs-on: ubuntu-latest
+      if: github.event_name == 'workflow_dispatch'
+      steps:
+          - name: Checkout
+            uses: actions/checkout@v3
+          - name: Run API tests on workflow trigger
+            uses: cypress-io/github-action@v5
+            with:
+              command: npx cypress run ${{ inputs.env-selector }} ${{ inputs.specs }}
+              browser: chrome
+              record: false
+  
+
