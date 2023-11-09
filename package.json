@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/rootstrap/base-automation-api#readme",
   "devDependencies": {
-    "cypress": "^13.4.0"
+    "cypress": "^13.5.0"
   },
   "dependencies": {
     "cypress-plugin-api": "^2.11.1"
