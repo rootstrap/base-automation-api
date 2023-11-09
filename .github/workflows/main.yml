@@ -1,4 +1,4 @@
-name: Caramel - API Automation Tests
+name: Rootstrap Base - API Automation Tests
 
 on:
   push:
