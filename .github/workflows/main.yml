@@ -44,7 +44,7 @@ jobs:
       - name: Run API Test
         uses: cypress-io/github-action@v5
         with:
-          command: npx cypress run --env environmentName=qa 
+          command: npx cypress run --env environmentName=qa
           browser: chrome
           record: false  
 
